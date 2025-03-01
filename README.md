@@ -42,10 +42,10 @@ This project is a web application that predicts house prices based on user input
 ## Screenshots
 
 ### 1.Example 1
-![Form Submission](screenshots/Pic_1.png)
+![Form Submission](screenshots/Pic_1.PNG)
 
 ### 2.Example 2
-![Prediction Result](screenshots/pic2.png)
+![Prediction Result](screenshots/pic2.PNG)
 
 
   
