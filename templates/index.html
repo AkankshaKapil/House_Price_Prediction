@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>House Price Prediction</h2>
+        <form action="/predict" method="POST">
+            <label for="area">Area (sq ft):</label>
+            <input type="number" name="area" value="{{ request.form['area'] if 'area' in request.form else '' }}" required>
+
+            <label for="bedrooms">Number of Bedrooms:</label>
+            <input type="number" name="bedrooms" value="{{ request.form['bedrooms'] if 'bedrooms' in request.form else '' }}" required>
+
+            <label for="bathrooms">Number of Bathrooms:</label>
+            <input type="number" name="bathrooms" value="{{ request.form['bathrooms'] if 'bathrooms' in request.form else '' }}" required>
+
+            <label for="stories">Number of Stories:</label>
+            <input type="number" name="stories" value="{{ request.form['stories'] if 'stories' in request.form else '' }}" required>
+
+            <label for="mainroad">Main Road Access:</label>
+            <select name="mainroad">
+                <option value="1" {% if request.form.get('mainroad') == '1' %}selected{% endif %}>Yes</option>
+                <option value="0" {% if request.form.get('mainroad') == '0' %}selected{% endif %}>No</option>
+            </select>
+
+            <label for="guestroom">Guest Room Available:</label>
+            <select name="guestroom">
+                <option value="1" {% if request.form.get('guestroom') == '1' %}selected{% endif %}>Yes</option>
+                <option value="0" {% if request.form.get('guestroom') == '0' %}selected{% endif %}>No</option>
+            </select>
+
+            <label for="basement">Basement Available:</label>
+            <select name="basement">
+                <option value="1" {% if request.form.get('basement') == '1' %}selected{% endif %}>Yes</option>
+                <option value="0" {% if request.form.get('basement') == '0' %}selected{% endif %}>No</option>
+            </select>
+
+            <label for="hotwaterheating">Hot Water Heating:</label>
+            <select name="hotwaterheating">
+                <option value="1" {% if request.form.get('hotwaterheating') == '1' %}selected{% endif %}>Yes</option>
+                <option value="0" {% if request.form.get('hotwaterheating') == '0' %}selected{% endif %}>No</option>
+            </select>
+
+            <label for="airconditioning">Air Conditioning:</label>
+            <select name="airconditioning">
+                <option value="1" {% if request.form.get('airconditioning') == '1' %}selected{% endif %}>Yes</option>
+                <option value="0" {% if request.form.get('airconditioning') == '0' %}selected{% endif %}>No</option>
+            </select>
+
+            <label for="parking">Parking Spaces:</label>
+            <input type="number" name="parking" value="{{ request.form['parking'] if 'parking' in request.form else '' }}" required>
+
+            <label for="prefarea">Preferred Area:</label>
+            <select name="prefarea">
+                <option value="1" {% if request.form.get('prefarea') == '1' %}selected{% endif %}>Yes</option>
+                <option value="0" {% if request.form.get('prefarea') == '0' %}selected{% endif %}>No</option>
+            </select>
+
+            <label for="furnishingstatus">Furnishing Status:</label>
+            <select name="furnishingstatus">
+                <option value="0" {% if request.form.get('furnishingstatus') == '0' %}selected{% endif %}>Unfurnished</option>
+                <option value="1" {% if request.form.get('furnishingstatus') == '1' %}selected{% endif %}>Semi-Furnished</option>
+                <option value="2" {% if request.form.get('furnishingstatus') == '2' %}selected{% endif %}>Furnished</option>
+            </select>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        <div class="result">
+            {% if prediction_text %}
+                {{ prediction_text }}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
