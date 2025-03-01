@@ -37,6 +37,17 @@ This project is a web application that predicts house prices based on user input
 - Click Predict Price to get the estimated price.
 
 - The form retains values after submission to enhance user experience.
+
+# Example Use Cases 
+## Screenshots
+
+### 1.Example 1
+![Form Submission](screenshots/Pic_1.png)
+
+### 2.Example 2
+![Prediction Result](screenshots/pic2.png)
+
+
   
 
 
